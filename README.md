@@ -10,6 +10,10 @@
 need to make another algorithm
 * new mixing rules
 * added --host 0.0.0.0 for mobile debugin
+* change the selector to a switch with 2 positions: a heart and a devil, when you pick one 
+the whole background changes with it, something like all in red and pinks tones for the heart
+and a whole darker with an skeleton doing the horns or something like that...
+
 
 ## Last functionalities added
 * ~~Adjusted shaking threshold~~
