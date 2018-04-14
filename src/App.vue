@@ -1,91 +1,174 @@
 <template>
   <div id="app">
-    <!--<img src="./assets/iconovaso_hdpi.png">-->
-    <select v-model="selected" id="selector">
+    <select v-model="selected" id="selector" style="z-index:99">
       <option v-for="option in options" :value="option.value">{{option.description}}</option>
     </select>
-    <div class="imageContainer">
-      <img srcset="./assets/iconovaso_ldpi.png 320w,
-             ./assets/iconovaso_ldpi.png 480w,
-             ./assets/iconovaso_hdpi.png 800w"
-           sizes="(max-width: 320px) 280px,
-            (max-width: 480px) 440px,
-            800px"
-           src="./assets/iconovaso_hdpi.png" alt="Shot glass" @click="mixShots">
-
+    <div class="image">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" enable-background="new 0 0 100 100"
+          xml:space="preserve" x="0px" y="0px" viewBox="0 0 41 60" style="z-index:99" id="shotSVG" ref="svg" @click="animateShot()" >
+          <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+          <g class="currentLayer" style="">
+            <title>Shot glass</title>
+            <path d="M1.8970001182556153,-1.525878801089675e-8 c-1.218,0 -1.8970000000000002,0.5800000000000002
+             -1.8970000000000002,1.633 l4.989,55.158 c0.07300000000000002,0.502 0.3060000000000001,0.8810000000000002
+             0.7520000000000002,1.029 c1.862,0.6190000000000002 7.51,1.812 14.461,1.812 c6.952,0 12.599,-1.193 14.462,-1.812
+             c0.4430000000000001,-0.14800000000000005 0.6780000000000004,-0.527 0.7520000000000002,-1.029 l4.9879999999999995,
+             -55.158 c0,-1.053 -0.6800000000000004,-1.633 -1.8970000000000002,-1.633 H1.8970001182556153
+             zM37.91200011825562,1.813999984741212 c0.4280000000000001,0 0.7350000000000002,0.3560000000000001
+             0.7540000000000002,0.6670000000000003 L35.075000118255616,38.95599998474121 c-0.6120000000000002,3.652
+             -5.6400000000000015,7.145 -14.873,7.145 s-14.261,-3.492 -14.873,-7.145 l-3.593,-36.476 c0.021000000000000008,
+             -0.3110000000000001 0.3280000000000001,-0.6670000000000003 0.7560000000000002,-0.6670000000000003 H37.91200011825562 z"
+                id="glass" class=""/>
+            <path fill="#eb1aeb" id="liquid"
+                  d="M67.8187,30.54539L64.89431,62.92805C59.33451,68.70527 44.3676,71.0658 34.69713,62.97529L31.4874,30.49637C43.99309,30.59176
+                  55.31301,30.45 67.8187,30.54539z" opacity="0" fill-opacity="0" z-index="-99"/>
+          </g>
+      </svg>
+      <div class="shape" ref="shape" >
+        <div class="inner" ref="inner">
+          <div class="fill" ref="fill" >
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+                <path class="waveShape" ref="wave" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+                    c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+                    c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
-    <svg id="trapezoid" viewbox="0 0 100 100" preserveAspectRatio="none" width="20%">
-      <path d="M0,0
-           L100,20
-           L100,80
-           L0,100z" fill="green"></path>
-    </svg>
+
     <h1>{{ shot }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+
   </div>
 </template>
 
 <script>
+  //en shotsvg puedes cambiar el color del vaso con fill: red
   import Drinks from './DrinksJson';
 
   export default {
     name: 'app',
     data() {
       return {
-        options: [{value: 1,description: 'Suave'},{value: 2,description: 'Medio'},{value: 1,description: 'Fuerte'}],
-        selected: 1,
+        options: [{value: 1, description: 'Suave'}, {value: 2, description: 'Medio'}, {value: 3, description: 'Fuerte'}],
+        selected: 2,
+        colors: ['#039be4','#42b983','#42b983'],
         shot: '',
         drinks: Drinks,
         softDrinks: [],
         mediumDrinks: [],
         hardDrinks: [],
-        nonAlcoholicDrinks: []
+        nonAlcoholicDrinks: [],
+        lastX: null,
+        lastY: null,
+        lastZ: null,
+        threshold: 10,
+        moveCounter: 0
       }
     },
     methods: {
+      shakingDevice(event){
+        var current =event.accelerationIncludingGravity;
+
+        if(current.x >= 1 && current.y>= 1 && current.z>=1) {
+          if(this.lastX===null ){
+            this.lastX = current.x;
+            this.lastY = current.y;
+            this.lastZ = current.z;
+          }
+
+          var deltaX = Math.abs(this.lastX - current.x);
+          var deltaY = Math.abs(this.lastY - current.y);
+          var deltaZ = Math.abs(this.lastZ - current.z);
+
+          if (deltaX + deltaY + deltaZ > 3) {
+            this.moveCounter++;
+          } else {
+            this.moveCounter = Math.max(0, --this.moveCounter);
+          }
+
+          if (this.moveCounter > this.threshold) {
+            this.moveCounter = 0;
+            this.animateShot();
+          }
+
+          this.lastX = current.x;
+          this.lastY = current.y;
+          this.lastZ = current.z;
+        }
+      },
+      animateShot(){
+
+        var svg = this.$refs.svg;
+        var fill = this.$refs.fill;
+        var shape = this.$refs.shape;
+        var inner = this.$refs.inner;
+        var wave = this.$refs.wave;
+
+        var left=svg.getBoundingClientRect().left;
+        var top=svg.getBoundingClientRect().top;
+        var width=svg.getBoundingClientRect().width;
+        var height=svg.getBoundingClientRect().height;
+
+        shape.style.setProperty('top',height*0.4+'px');
+        fill.style.setProperty('top' ,height*0.5+'px');
+        inner.style.setProperty('top',height*0.5+'px');
+        shape.style.setProperty('height',height*0.5+'px');
+        wave.style.setProperty('opacity',1);
+
+        shape.style.setProperty('fill',this.colors[this.selected-1]);
+        wave.style.setProperty('fill',this.colors[this.selected-1]);
+        shape.style.setProperty('animation-name','waveAction');
+        wave.style.setProperty('animation-name','waveAction');
+        fill.style.setProperty('animation-name' ,'fillAction');
+        inner.style.setProperty('animation-name','fillAction');
+        this.mixShots();
+        setTimeout(function(){
+          fill.style.setProperty('animation-name' ,'');
+          inner.style.setProperty('animation-name','');
+        },2000);
+      },
       mixShots() {
-        var softDrink=this.softDrinks[Math.floor(Math.random()*this.softDrinks.length)];
+        var softDrink = this.softDrinks[Math.floor(Math.random() * this.softDrinks.length)];
         var mediumDrink = this.mediumDrinks[Math.floor(Math.random() * this.mediumDrinks.length)];
-        var nonAlcoholicDrink = this.nonAlcoholicDrinks[Math.floor(Math.random()*this.nonAlcoholicDrinks.length)];
+        var nonAlcoholicDrink = this.nonAlcoholicDrinks[Math.floor(Math.random() * this.nonAlcoholicDrinks.length)];
 
         this.shot = softDrink.drink
-                    + ' - ' + mediumDrink.drink
-                    + ' - ' + nonAlcoholicDrink.drink;
+          + ' - ' + mediumDrink.drink
+          + ' - ' + nonAlcoholicDrink.drink;
 
-        this.drinks.find(drink => drink.id==softDrink.id).times+=1;
-        this.drinks.find(drink => drink.id==mediumDrink.id).times+=1;
-        this.drinks.find(drink => drink.id==nonAlcoholicDrink.id).times+=1;
+        this.drinks.find(drink => drink.id == softDrink.id).times += 1;
+        this.drinks.find(drink => drink.id == mediumDrink.id).times += 1;
+        this.drinks.find(drink => drink.id == nonAlcoholicDrink.id).times += 1;
 
         localStorage.setItem('drinkList', JSON.stringify(this.drinks));
       }
     },
-    created(){
+    watch:{
+      selected: function(previousValue, newValue){
+        console.log("options: "+previousValue+" - "+newValue);
+      }
+    },
+    created() {
       console.log('before created');
       if (localStorage.getItem("drinkList") === null) {
-        console.log('setting'+this.drinks[0].drink);
+        console.log('setting' + this.drinks[0].drink);
         localStorage.setItem('drinkList', JSON.stringify(this.drinks));
       }
-      else{
+      else {
         console.log("already set");
-        this.drinks=JSON.parse(localStorage.getItem('drinkList'));
+        this.drinks = JSON.parse(localStorage.getItem('drinkList'));
       }
-      this.softDrinks=this.drinks.filter(drink => drink.type==1);
-      this.mediumDrinks=this.drinks.filter(drink => drink.type==2);
-      this.hardDrinks=this.drinks.filter(drink => drink.type==3);
-      this.nonAlcoholicDrinks=this.drinks.filter(drink => drink.type==4);
+      this.softDrinks = this.drinks.filter(drink => drink.type == 1);
+      this.mediumDrinks = this.drinks.filter(drink => drink.type == 2);
+      this.hardDrinks = this.drinks.filter(drink => drink.type == 3);
+      this.nonAlcoholicDrinks = this.drinks.filter(drink => drink.type == 4);
+
+      window.addEventListener('devicemotion', this.shakingDevice);
+      //window.addEventListener('MozOrientation', this.shakingDevice);
+      //window.addEventListener('deviceorientation', this.shakingDevice);
+      this.shot="";
     }
   }
 </script>
@@ -100,12 +183,13 @@
     margin-top: 5em;
   }
 
-  #selector{
-    position:absolute;
+  #selector {
+    position: absolute;
     font-size: 1.7em;
-    top:10%;
+    top: 10%;
     right: 25%;
   }
+
   img {
     cursor: pointer;
   }
@@ -127,96 +211,69 @@
   a {
     color: #42b983;
   }
-  .imageContainer{
-    position: relative;
-    width: auto;
+
+  .image{
+    position:relative;
   }
-  .overShot{
+  #shotSVG{
+    left:10%;
+    width:25%;
+    cursor: pointer;
+  }
+  .shape{
+    width:20.3%;
+    height:20%;
+    overflow: hidden;
     position: absolute;
-    top:3em;
-    left: 47%;
-    border: red 1px solid;
-    width:100px;
-    height: 100px;
+    left:39.6%;
+    top:30%;
+    border-bottom-left-radius: 70%;
+    border-bottom-right-radius: 50%;
+    z-index:-1;
+  }
+  .inner{
+    overflow: hidden;
+    width: 250%;
+    z-index:-1;
+  }
+  .fill {
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: cubic-bezier(.2, .6, .8, .4);
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: forwards;
   }
 
-  #animation {
-    height: 50px;
-    width: 50px;
-    border: solid 1px #000;
-    border-radius: 0 0 50% 50%;
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    margin: 20px;
+  .shape .fill {
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: cubic-bezier(0.2, 0.6, 0.8, 0.4);
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: forwards;
   }
-  #animation:before {
-    height: 100%;
-    width: 1px;
-    background: #000;
-    content: '';
-    display: block;
-    left: 50%;
-    top: 100%;
-    position: absolute;
+  .shape .waveShape {
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration: 0.5s;
+    width: 600px;
+    height: 150px;
+    fill: #039be4;
+    opacity:0;
   }
-  #animation:after {
-    height: 100%;
-    width: 40px;
-    height: 1px;
-    background: #000;
-    content: '';
-    display: block;
-    left: 50%;
-    margin-left: -20px;
-    top: 100px;
-    position: absolute;
-  }
-  .two {
-    border-width: 6px;
-    border-radius: 5px 5px 50% 50%;
 
-  }
-  .two:before {
-    width: 6px;
-    margin-left: -3px;
-  }
-  .two:after {
-    height: 6px;
-    border-radius: 6px;
-  }
-  span {
-    position: absolute;
-    bottom: -6px;
-    left: -6px;
-    background: #F00;
-    width: 100%;
-    border: solid 6px #000;
-    border-top: none;
-    -webkit-animation: fillGlass 3s infinite;
-    animation: fillGlass 3s infinite;
-    border-radius: 0 0 50px 50px;
-  }
-  @-webkit-keyframes fillGlass {
+  @keyframes fillAction {
     0% {
-      height: 25px;
-    }
-    50% {
-      height: 46px;
+      -webkit-transform: translate(0, 150px);
     }
     100% {
-      height: 25px;
+      -webkit-transform: translate(0, 10px);
     }
   }
-  @keyframes fillGlass {
+  @keyframes waveAction {
     0% {
-      height: 25px;
-    }
-    50% {
-      height: 46px;
+      -webkit-transform: translate(-150px, 0);
     }
     100% {
-      height: 25px;
+      -webkit-transform: translate(0, 0);
     }
   }
+
 </style>
