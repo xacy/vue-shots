@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <select v-model="selected" id="selector" style="z-index:99">
-      <option v-for="option in options" :value="option.value">{{option.description}}</option>
-    </select>
+    <app-drawer>
+    <switches v-model="hardcore" theme="bulma" color="red" type-bold="true" id="selector" style="z-index: 98"></switches>
+
     <div class="image">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" enable-background="new 0 0 100 100"
           xml:space="preserve" x="0px" y="0px" viewBox="0 0 41 60" style="z-index:99" id="shotSVG" ref="svg" @click="animateShot()" >
@@ -37,8 +37,8 @@
         </div>
       </div>
     </div>
-
-    <h1>{{ shot }}</h1>
+    </app-drawer>
+    <h1>{{ shot.drink1 }} - {{ shot.drink2 }} - {{ shot.drink3 }}</h1>
 
   </div>
 </template>
@@ -46,15 +46,19 @@
 <script>
   //en shotsvg puedes cambiar el color del vaso con fill: red
   import Drinks from './DrinksJson';
+  import Switches from 'vue-switches';
+  import Drawer from './components/Drawer';
 
   export default {
     name: 'app',
     data() {
       return {
         options: [{value: 1, description: 'Suave'}, {value: 2, description: 'Medio'}, {value: 3, description: 'Fuerte'}],
+        hardcore: false,
         selected: 2,
-        colors: ['#039be4','#42b983','#42b983'],
-        shot: '',
+        colors: ['#039be4','#42b983'],
+        shot: {drink1: '',drink2: '',drink3:''},
+        favourites: [],
         drinks: Drinks,
         softDrinks: [],
         mediumDrinks: [],
@@ -66,6 +70,10 @@
         threshold: 10,
         moveCounter: 0
       }
+    },
+    components:{
+      Switches,
+      'app-drawer':Drawer
     },
     methods: {
       shakingDevice(event){
@@ -117,8 +125,8 @@
         shape.style.setProperty('height',height*0.5+'px');
         wave.style.setProperty('opacity',1);
 
-        shape.style.setProperty('fill',this.colors[this.selected-1]);
-        wave.style.setProperty('fill',this.colors[this.selected-1]);
+        shape.style.setProperty('fill',this.hardcore?this.colors[0]:this.colors[1]);
+        wave.style.setProperty('fill',this.hardcore?this.colors[0]:this.colors[1]);
         shape.style.setProperty('animation-name','waveAction');
         wave.style.setProperty('animation-name','waveAction');
         fill.style.setProperty('animation-name' ,'fillAction');
@@ -134,9 +142,9 @@
         var mediumDrink = this.mediumDrinks[Math.floor(Math.random() * this.mediumDrinks.length)];
         var nonAlcoholicDrink = this.nonAlcoholicDrinks[Math.floor(Math.random() * this.nonAlcoholicDrinks.length)];
 
-        this.shot = softDrink.drink
-          + ' - ' + mediumDrink.drink
-          + ' - ' + nonAlcoholicDrink.drink;
+        this.shot = {drink1: softDrink.drink,
+          drink2: mediumDrink.drink,
+          drink3: nonAlcoholicDrink.drink};
 
         this.drinks.find(drink => drink.id == softDrink.id).times += 1;
         this.drinks.find(drink => drink.id == mediumDrink.id).times += 1;
