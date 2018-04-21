@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <app-drawer>
+    <app-drawer :favourites="favourites">
     <switches v-model="hardcore" theme="bulma" color="red" type-bold="true" id="selector" style="z-index: 98"></switches>
 
     <div class="image">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" enable-background="new 0 0 100 100"
-          xml:space="preserve" x="0px" y="0px" viewBox="0 0 41 60" style="z-index:99" id="shotSVG" ref="svg" @click="animateShot()" >
+          xml:space="preserve" x="0px" y="0px" viewBox="0 0 41 60" style="z-index:99" id="shotSVG" ref="svg" @click="animateShot()">
           <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
           <g class="currentLayer" style="">
             <title>Shot glass</title>
@@ -38,8 +38,7 @@
       </div>
     </div>
     </app-drawer>
-    <h1>{{ shot.drink1 }} - {{ shot.drink2 }} - {{ shot.drink3 }}</h1>
-
+    <app-shot :shot="shot"></app-shot>
   </div>
 </template>
 
@@ -48,6 +47,8 @@
   import Drinks from './DrinksJson';
   import Switches from 'vue-switches';
   import Drawer from './components/Drawer';
+  import Shot from './components/Shot';
+  import { eventBus } from './main.js';
 
   export default {
     name: 'app',
@@ -58,7 +59,7 @@
         selected: 2,
         colors: ['#039be4','#42b983'],
         shot: {drink1: '',drink2: '',drink3:''},
-        favourites: [],
+        favourites: [{name: 'Tantrum',drink1: 'Absenta', drink2: 'Vodka', drink3: 'Lima'}],
         drinks: Drinks,
         softDrinks: [],
         mediumDrinks: [],
@@ -73,7 +74,8 @@
     },
     components:{
       Switches,
-      'app-drawer':Drawer
+      'app-drawer':Drawer,
+      'app-shot': Shot
     },
     methods: {
       shakingDevice(event){
@@ -177,6 +179,13 @@
       //window.addEventListener('MozOrientation', this.shakingDevice);
       //window.addEventListener('deviceorientation', this.shakingDevice);
       this.shot="";
+      eventBus.$on('favouriteWasClicked',(data) => {
+        this.animateShot();
+        this.shot=data;
+      });
+      eventBus.$on('addingFavourite',(data) => {
+        this.favourites.push(data);
+      });
     }
   }
 </script>
