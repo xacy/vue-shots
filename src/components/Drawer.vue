@@ -9,17 +9,27 @@
 
           <h3>Favoritos</h3>
           <ul>
-            <li v-for="favourite in favourites" @click="favouriteClick(favourite)">
-              <p>{{ favourite.name}} ({{ favourite.drink1}} ,{{ favourite.drink2}} , {{ favourite.drink3}})</p>
+            <li v-for="favourite in favourites" class="listItem">
+              <p  @click="favouriteClick(favourite)" class="shotData"><b>{{ favourite.name}}</b> <br/>({{ favourite.drink1}} ,{{ favourite.drink2}} , {{ favourite.drink3}})</p>
+              <img src="../assets/noun_1364737_cc.svg" style="width:1.5em" @click="deleteFav(favourite)" class="shotData"/>
             </li>
           </ul>
         </div>
     </div>
     </transition>
+
     <transition name="content">
       <div :class="contentClasses" ref="content" @click="drawerClick">
       </div>
     </transition>
+    <modal name="delete-shot" >
+      <div class="modal-content">
+        <h1>¿Seguro que quiere borrar este chupito?</h1>
+
+        <div class="button-container"><button @click="removeFav()" >Borrar </button></div>
+      </div>
+
+    </modal>
     <slot></slot>
   </div>
 
@@ -37,7 +47,8 @@
             showing: false,
             drawerClasses: 'drawer ',
             contentClasses: 'content ',
-            openerClasses: 'opener '
+            openerClasses: 'opener ',
+            selectedFav: {}
         }
       },
       methods: {
@@ -56,8 +67,14 @@
             this.open();
             setTimeout(function(){self.showing=true;},900);
           }
-
-
+        },
+        deleteFav(favourite){
+            this.selectedFav=favourite;
+            this.$modal.show('delete-shot');
+        },
+        removeFav(){
+          eventBus.deleteFavourite(this.selectedFav);
+          this.$modal.hide('delete-shot');
         },
         open(){
           this.$refs.opener.style.right="-5em";
@@ -93,8 +110,16 @@
     font-size: 2em;
   }
   .list li{
+    display: inline-flex;
+    width:85%;
+    text-align: left;
+  }
+  .listItem{
+    display: inline-flex;
+    justify-content: space-between;
+  }
+  .shotData{
     cursor: pointer;
-    display: block;
   }
   .drawer{
     width:0;
@@ -132,5 +157,8 @@
     opacity: 1;
     visibility: visible;
     transition: opacity 1s;
+  }
+  .modal-content{
+    margin: 1em 1em 1em 1em;
   }
 </style>

@@ -10,6 +10,9 @@ export const eventBus = new Vue({
     },
     addFavourite(favourite){
       this.$emit('addingFavourite',favourite);
+    },
+    deleteFavourite(favourite){
+      this.$emit('deletingFavourite',favourite);
     }
   }
 });

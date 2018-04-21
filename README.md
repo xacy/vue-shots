@@ -6,6 +6,7 @@
 * added --host 0.0.0.0 for mobile debugin
 ## TODO
 
+* Add delete fav functionality
 * Java code translated from old app slows down the app to the point of make it unusable,
 need to make another algorithm
 * new mixing rules

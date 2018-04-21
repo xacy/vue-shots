@@ -201,6 +201,13 @@
         this.favourites.push(data);
         localStorage.setItem('favouriteShots', JSON.stringify(this.favourites));
       });
+      eventBus.$on('deletingFavourite',(data) => {
+        var index = this.favourites.indexOf(data);
+        if (index > -1) {
+          this.favourites.splice(index, 1);
+        }
+        localStorage.setItem('favouriteShots', JSON.stringify(this.favourites));
+      });
     }
   }
 </script>
@@ -218,7 +225,7 @@
   #selector {
     position: absolute;
     font-size: 1.7em;
-    top: 10%;
+    top: 4.2em;
     right: 4em;
     transform: scaleX(2) scaleY(2);
   }
@@ -255,6 +262,47 @@
 
   a {
     color: #42b983;
+  }
+
+  /*MODAL STYLES*/
+  .modal-content input{
+    width: 100%;
+    height: 2em;
+    font-size: large;
+  }
+  .button-container{
+    position:absolute;
+    bottom:1em;
+    width:90%;
+  }
+  .modal-content button{
+    border: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+  }
+  .modal-content button {
+    position: relative;
+    vertical-align: bottom;
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    font-size: 22px;
+    color:#454545;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: #ecf0f1;
+    border: 0;
+    border-bottom: 2px solid #dadedf;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 -2px #dadedf;
+    box-shadow: inset 0 -2px #dadedf;
+  }
+  .modal-content button:active {
+    top: 1px;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
   }
 
   .image{
