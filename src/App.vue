@@ -57,9 +57,9 @@
         options: [{value: 1, description: 'Suave'}, {value: 2, description: 'Medio'}, {value: 3, description: 'Fuerte'}],
         hardcore: false,
         selected: 2,
-        colors: ['#039be4','#42b983'],
+        colors: ['#5dca31','#EE1A59'],
         shot: {drink1: '',drink2: '',drink3:''},
-        favourites: [{name: 'Tantrum',drink1: 'Absenta', drink2: 'Vodka', drink3: 'Lima'}],
+        favourites: [{name: 'Tantrum', type: 1, drink1: 'Absenta', drink2: 'Vodka', drink3: 'Lima'}],
         drinks: Drinks,
         softDrinks: [],
         mediumDrinks: [],
@@ -146,7 +146,7 @@
 
         this.shot = {drink1: softDrink.drink,
           drink2: mediumDrink.drink,
-          drink3: nonAlcoholicDrink.drink};
+          drink3: nonAlcoholicDrink.drink, type: this.hardcore?1:0};
 
         this.drinks.find(drink => drink.id == softDrink.id).times += 1;
         this.drinks.find(drink => drink.id == mediumDrink.id).times += 1;
@@ -192,6 +192,7 @@
       //window.addEventListener('deviceorientation', this.shakingDevice);
       this.shot="";
       eventBus.$on('favouriteWasClicked',(data) => {
+        this.hardcore=data.type==1?true:false;
         this.animateShot();
         this.shot=data;
       });

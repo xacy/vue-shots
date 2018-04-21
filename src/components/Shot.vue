@@ -55,7 +55,7 @@
             this.inputClass='input-error'
           }
           else{
-            let favourite={name: this.newName,drink1: this.shot.drink1, drink2: this.shot.drink2, drink3: this.shot.drink3};
+            let favourite={name: this.newName,drink1: this.shot.drink1, drink2: this.shot.drink2, drink3: this.shot.drink3, type: this.shot.type};
             eventBus.addFavourite(favourite);
             this.$modal.hide('hello-world');
           }
