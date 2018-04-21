@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="shot" @click="showModal">
-      <h1 v-if="shotIsEmpty">{{ shot.drink1 }} - {{ shot.drink2 }} - {{ shot.drink3 }}</h1>
-      <img v-if="shotIsEmpty" src="../assets/noun_1308_cc.svg" width="75em" />
-    </div>
+    <transition name="fade">
+      <div class="shot" @click="showModal" v-if="shotIsEmpty">
+        <h1 >{{ shot.drink1 }} - {{ shot.drink2 }} - {{ shot.drink3 }}</h1>
+        <img  src="../assets/noun_1308_cc.svg" width="75em" />
+      </div>
+    </transition>
     <modal name="hello-world">
       <div class="modal-content">
         <h1>Ponle un nombre a tu creación:</h1>
@@ -63,7 +65,12 @@
 </script>
 
 <style scoped>
-
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
   .shot{
     display: inline-flex;
     cursor: pointer;

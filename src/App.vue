@@ -153,6 +153,23 @@
         this.drinks.find(drink => drink.id == nonAlcoholicDrink.id).times += 1;
 
         localStorage.setItem('drinkList', JSON.stringify(this.drinks));
+      },
+      localStorageOperations(){
+        if (localStorage.getItem("drinkList") === null) {
+          console.log('setting' + this.drinks[0].drink);
+          localStorage.setItem('drinkList', JSON.stringify(this.drinks));
+        }
+        else {
+          console.log("already set");
+          this.drinks = JSON.parse(localStorage.getItem('drinkList'));
+        }
+        if (localStorage.getItem("favouriteShots") === null) {
+          localStorage.setItem('favouriteShots', JSON.stringify(this.favourites));
+        }
+        else {
+          console.log("already set");
+          this.favourites = JSON.parse(localStorage.getItem('favouriteShots'));
+        }
       }
     },
     watch:{
@@ -162,14 +179,9 @@
     },
     created() {
       console.log('before created');
-      if (localStorage.getItem("drinkList") === null) {
-        console.log('setting' + this.drinks[0].drink);
-        localStorage.setItem('drinkList', JSON.stringify(this.drinks));
-      }
-      else {
-        console.log("already set");
-        this.drinks = JSON.parse(localStorage.getItem('drinkList'));
-      }
+
+      this.localStorageOperations();
+
       this.softDrinks = this.drinks.filter(drink => drink.type == 1);
       this.mediumDrinks = this.drinks.filter(drink => drink.type == 2);
       this.hardDrinks = this.drinks.filter(drink => drink.type == 3);
@@ -185,6 +197,7 @@
       });
       eventBus.$on('addingFavourite',(data) => {
         this.favourites.push(data);
+        localStorage.setItem('favouriteShots', JSON.stringify(this.favourites));
       });
     }
   }
