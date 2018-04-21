@@ -3,13 +3,14 @@
     <transition name="drawer">
     <div :class="drawerClasses" ref="drawer">
       <div :class="openerClasses" @click="drawerClick" ref="opener">
-        <img src="../assets/star_punk.svg" id="star" style="width:150px"/>
+        <img src="../assets/noun_1308_cc.svg" id="star" style="width:100px"/>
       </div>
-
         <div class="list" v-if="showing">
+
+          <h3>Favoritos</h3>
           <ul>
             <li v-for="favourite in favourites" @click="favouriteClick(favourite)">
-              {{ favourite.name}}
+              <p>{{ favourite.name}} ({{ favourite.drink1}} ,{{ favourite.drink2}} , {{ favourite.drink3}})</p>
             </li>
           </ul>
         </div>
@@ -82,13 +83,13 @@
   .opener{
     position: absolute;
     left:4em;
-    top:5%;
+    top:5em;
     cursor: pointer;
     z-index: 99;
   }
   .list{
     position:relative;
-    top: 20%;
+    top: 6em;
     font-size: 2em;
   }
   .list li{
@@ -104,10 +105,15 @@
     transition: width 1s;
     background-color: #fcfcfc;
     z-index:100;
+    padding-left:1.5em;
+    padding-right:1.5em;
   }
   .drawer-active{
     width:30%;
     transition: width 1s;
+  }
+  .separator{
+    width:75%;
   }
   .content{
     position: fixed; /* Stay in place */

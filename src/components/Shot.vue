@@ -3,9 +3,12 @@
     <transition name="fade">
       <div class="shot" @click="showModal" v-if="shotIsEmpty">
         <h1 >{{ shot.drink1 }} - {{ shot.drink2 }} - {{ shot.drink3 }}</h1>
-        <img  src="../assets/noun_1308_cc.svg" width="75em" />
+        <img  src="../assets/noun_256576_cc.svg" width="75em" />
       </div>
     </transition>
+    <div class="shot" v-if="!shotIsEmpty">
+      <h1>Toca el vaso o agita el móvil para probar un chupito aleatorio.</h1>
+    </div>
     <modal name="hello-world">
       <div class="modal-content">
         <h1>Ponle un nombre a tu creación:</h1>

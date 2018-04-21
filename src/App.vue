@@ -18,7 +18,7 @@
              0.7540000000000002,0.6670000000000003 L35.075000118255616,38.95599998474121 c-0.6120000000000002,3.652
              -5.6400000000000015,7.145 -14.873,7.145 s-14.261,-3.492 -14.873,-7.145 l-3.593,-36.476 c0.021000000000000008,
              -0.3110000000000001 0.3280000000000001,-0.6670000000000003 0.7560000000000002,-0.6670000000000003 H37.91200011825562 z"
-                id="glass" class=""/>
+                id="glass" fill="#B1E5F2" class=""/>
             <path fill="#eb1aeb" id="liquid"
                   d="M67.8187,30.54539L64.89431,62.92805C59.33451,68.70527 44.3676,71.0658 34.69713,62.97529L31.4874,30.49637C43.99309,30.59176
                   55.31301,30.45 67.8187,30.54539z" opacity="0" fill-opacity="0" z-index="-99"/>
@@ -69,7 +69,8 @@
         lastY: null,
         lastZ: null,
         threshold: 10,
-        moveCounter: 0
+        moveCounter: 0,
+        burmaColors: ['#ffd1da','#ff6b89']
       }
     },
     components:{
@@ -218,9 +219,22 @@
     position: absolute;
     font-size: 1.7em;
     top: 10%;
-    right: 25%;
+    right: 4em;
+    transform: scaleX(2) scaleY(2);
+  }
+  .vue-switcher-theme--bulma.vue-switcher-color--red div{
+    background-color: #31c97850 !important;
   }
 
+  .vue-switcher-theme--bulma.vue-switcher-color--red div:after{
+    background-color:#5dca31 !important;
+  }
+  .vue-switcher-theme--bulma.vue-switcher-color--red.vue-switcher--unchecked div{
+    background-color:#ffd1da !important;
+  }
+  .vue-switcher-theme--bulma.vue-switcher-color--red.vue-switcher--unchecked div:after{
+    background-color:#ff6b89 !important;
+  }
   img {
     cursor: pointer;
   }
