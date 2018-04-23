@@ -5,7 +5,7 @@
 
     <div class="image">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" enable-background="new 0 0 100 100"
-          xml:space="preserve" x="0px" y="0px" viewBox="0 0 41 60" style="z-index:99" id="shotSVG" ref="svg" @click="animateShot()">
+          xml:space="preserve" x="0px" y="0px" viewBox="0 0 41 60" style="z-index:98" id="shotSVG" ref="svg" @click="animateShot()">
           <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
           <g class="currentLayer" style="">
             <title>Shot glass</title>
@@ -122,11 +122,21 @@
         var width=svg.getBoundingClientRect().width;
         var height=svg.getBoundingClientRect().height;
 
-        shape.style.setProperty('top',height*0.4+'px');
-        fill.style.setProperty('top' ,height*0.5+'px');
-        inner.style.setProperty('top',height*0.5+'px');
-        shape.style.setProperty('height',height*0.5+'px');
-        wave.style.setProperty('opacity',1);
+        if (window.innerHeight > window.innerWidth) {
+          shape.style.setProperty('top',height*0.79+'px');
+          fill.style.setProperty('top' ,height*0.79+'px');
+          inner.style.setProperty('top',height*0.3+'px');
+          shape.style.setProperty('height',height*0.5+'px');
+          wave.style.setProperty('opacity',1);
+        }
+        else{
+          shape.style.setProperty('top',height*0.4+'px');
+          fill.style.setProperty('top' ,height*0.5+'px');
+          inner.style.setProperty('top',height*0.5+'px');
+          shape.style.setProperty('height',height*0.5+'px');
+          wave.style.setProperty('opacity',1);
+        }
+
 
         shape.style.setProperty('fill',this.hardcore?this.colors[0]:this.colors[1]);
         wave.style.setProperty('fill',this.hardcore?this.colors[0]:this.colors[1]);
@@ -213,34 +223,10 @@
 </script>
 
 <style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 5em;
-  }
-
-  #selector {
-    position: absolute;
-    font-size: 1.7em;
-    top: 4.2em;
-    right: 4em;
-    transform: scaleX(2) scaleY(2);
-  }
-  .vue-switcher-theme--bulma.vue-switcher-color--red div{
-    background-color: #31c97850 !important;
-  }
-
-  .vue-switcher-theme--bulma.vue-switcher-color--red div:after{
-    background-color:#5dca31 !important;
-  }
-  .vue-switcher-theme--bulma.vue-switcher-color--red.vue-switcher--unchecked div{
-    background-color:#ffd1da !important;
-  }
-  .vue-switcher-theme--bulma.vue-switcher-color--red.vue-switcher--unchecked div:after{
-    background-color:#ff6b89 !important;
+  html, body {
+    margin: 0;
+    height:100vh !important;
+    max-height:100vh !important;
   }
   img {
     cursor: pointer;
@@ -263,6 +249,29 @@
   a {
     color: #42b983;
   }
+
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  .vue-switcher-theme--bulma.vue-switcher-color--red div{
+    background-color: #31c97850 !important;
+  }
+
+  .vue-switcher-theme--bulma.vue-switcher-color--red div:after{
+    background-color:#5dca31 !important;
+  }
+  .vue-switcher-theme--bulma.vue-switcher-color--red.vue-switcher--unchecked div{
+    background-color:#ffd1da !important;
+  }
+  .vue-switcher-theme--bulma.vue-switcher-color--red.vue-switcher--unchecked div:after{
+    background-color:#ff6b89 !important;
+  }
+
 
   /*MODAL STYLES*/
   .modal-content input{
@@ -304,26 +313,26 @@
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-
+  /* Common Shot position */
+  #selector {
+    position: absolute;
+    font-size: 1.7em;
+    transform: scaleX(2) scaleY(2);
+  }
   .image{
     position:relative;
   }
   #shotSVG{
-    left:10%;
-    width:25%;
     cursor: pointer;
   }
   .shape{
-    width:20.3%;
-    height:20%;
     overflow: hidden;
     position: absolute;
-    left:39.6%;
-    top:30%;
     border-bottom-left-radius: 70%;
     border-bottom-right-radius: 50%;
     z-index:-1;
   }
+
   .inner{
     overflow: hidden;
     width: 250%;
@@ -352,20 +361,83 @@
     opacity:0;
   }
 
-  @keyframes fillAction {
-    0% {
-      -webkit-transform: translate(0, 150px);
-    }
-    100% {
-      -webkit-transform: translate(0, 10px);
-    }
-  }
   @keyframes waveAction {
     0% {
       -webkit-transform: translate(-150px, 0);
     }
     100% {
       -webkit-transform: translate(0, 0);
+    }
+  }
+
+  @media screen and (orientation:portrait) {
+    /* Portrait styles here */
+    #app{
+      height:100%;
+      max-height:100%;
+    }
+    #selector {
+      top: 8.2em;
+      right: 0;
+      transform: scaleX(4) scaleY(4);
+    }
+    #shotSVG{
+      position: relative;
+      top:25vh;
+      left: 5em;
+      width:75%;
+    }
+    .shape{
+      width:58.8%;
+      height:25vh;
+      left:28%;
+    }
+    @keyframes fillAction {
+      0% {
+        -webkit-transform: translate(0, 350px);
+      }
+      100% {
+        -webkit-transform: translate(0, 50px);
+      }
+    }
+  }
+  /* Landscape */
+
+  @media screen and (orientation:landscape){
+    /* Landscape styles here */
+    #selector {
+      top: 4.2em;
+      right: 4em;
+    }
+    #shotSVG{
+      left:10%;
+      width:25%;
+    }
+    .shape{
+      width:20.2%;
+      height:20%;
+      height:20%;
+      left:39.6%;
+      top:30%;
+    }
+    @keyframes fillAction {
+      0% {
+        -webkit-transform: translate(0, 150px);
+      }
+      100% {
+        -webkit-transform: translate(0, 10px);
+      }
+    }
+  }
+
+  @media screen and (min-height:600px) and (orientation:landscape){
+    #app{
+      padding-top: 5em;
+    }
+  }
+  @media screen and (max-height:600px) and (orientation:landscape){
+    #app{
+      padding-top: 1em;
     }
   }
 

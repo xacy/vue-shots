@@ -3,7 +3,7 @@
     <transition name="drawer">
     <div :class="drawerClasses" ref="drawer">
       <div :class="openerClasses" @click="drawerClick" ref="opener">
-        <img src="../assets/noun_1308_cc.svg" id="star" style="width:100px"/>
+        <img src="../assets/noun_1308_cc.svg" id="star"/>
       </div>
         <div class="list" v-if="showing">
 
@@ -93,20 +93,13 @@
 </script>
 
 <style scoped>
-  #star{
-    width:6em;
-    cursor: pointer;
-  }
   .opener{
     position: absolute;
-    left:4em;
-    top:5em;
     cursor: pointer;
     z-index: 99;
   }
   .list{
     position:relative;
-    top: 6em;
     font-size: 2em;
   }
   .list li{
@@ -134,7 +127,6 @@
     padding-right:1.5em;
   }
   .drawer-active{
-    width:30%;
     transition: width 1s;
   }
   .separator{
@@ -160,5 +152,43 @@
   }
   .modal-content{
     margin: 1em 1em 1em 1em;
+  }
+  @media screen and (orientation:portrait) {
+    .opener{
+      left:4em;
+      top:9em;
+    }
+    #star{
+      width:12em;
+      cursor: pointer;
+    }
+    .list{
+      top: 12em;
+    }
+    .drawer-active{
+      width:60%;
+    }
+  }
+  @media screen and (orientation:landscape){
+    .opener{
+      left:4em;
+      top:5em;
+    }
+    #star{
+      width:6em;
+      cursor: pointer;
+    }
+    .list{
+      top: 6em;
+    }
+    .drawer-active{
+      width:30%;
+    }
+  }
+  @media screen and (min-height:600px) and (orientation:landscape){
+
+  }
+  @media screen and (max-height:600px) and (orientation:landscape){
+
   }
 </style>

@@ -6,7 +6,6 @@
 * added --host 0.0.0.0 for mobile debugin
 ## TODO
 
-* Add delete fav functionality
 * Java code translated from old app slows down the app to the point of make it unusable,
 need to make another algorithm
 * new mixing rules
@@ -26,3 +25,4 @@ and a whole darker with an skeleton doing the horns or something like that...~~
 * ~~Possibility to save one shot as favorite~~
 * ~~Persist favorite list to local storage~~
 * ~~Make the star in the drawer bigger~~
+* ~~Add delete fav functionality~~

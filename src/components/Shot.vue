@@ -95,5 +95,24 @@
   .input-error{
     border: solid 1px red;
   }
+  @media screen and (orientation:portrait) {
+    .shot{
+      position: absolute;
+      bottom: 10em;
+      left:5%;
+      width:100%;
+    }
+  }
+  @media screen and (orientation:landscape){
+
+  }
+  @media screen and (min-width:650px) and (orientation:portrait){
+    .shot{
+      position: absolute;
+      bottom:-15em;
+      left:5%;
+      width:100%;
+    }
+  }
 
 </style>
