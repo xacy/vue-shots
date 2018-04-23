@@ -38,12 +38,7 @@
       },
       watch: {
         shot(){
-          if(this.shot.drink1){
-            this.shotIsEmpty=true;
-          }
-          else{
-            this.shotIsEmpty= false;
-          }
+          this.shotIsEmpty = !!this.shot.drink1;
         }
       },
       methods:{

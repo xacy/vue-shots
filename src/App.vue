@@ -1,3 +1,5 @@
+<!--suppress ALL -->
+
 <template>
   <div id="app">
     <app-drawer :favourites="favourites">
@@ -6,7 +8,7 @@
     <div class="image">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" enable-background="new 0 0 100 100"
           xml:space="preserve" x="0px" y="0px" viewBox="0 0 41 60" style="z-index:98" id="shotSVG" ref="svg" @click="animateShot()">
-          <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
+        <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"></rect>
           <g class="currentLayer" style="">
             <title>Shot glass</title>
             <path d="M1.8970001182556153,-1.525878801089675e-8 c-1.218,0 -1.8970000000000002,0.5800000000000002
@@ -18,10 +20,10 @@
              0.7540000000000002,0.6670000000000003 L35.075000118255616,38.95599998474121 c-0.6120000000000002,3.652
              -5.6400000000000015,7.145 -14.873,7.145 s-14.261,-3.492 -14.873,-7.145 l-3.593,-36.476 c0.021000000000000008,
              -0.3110000000000001 0.3280000000000001,-0.6670000000000003 0.7560000000000002,-0.6670000000000003 H37.91200011825562 z"
-                id="glass" fill="#B1E5F2" class=""/>
+                  id="glass" fill="#B1E5F2" class=""></path>
             <path fill="#eb1aeb" id="liquid"
                   d="M67.8187,30.54539L64.89431,62.92805C59.33451,68.70527 44.3676,71.0658 34.69713,62.97529L31.4874,30.49637C43.99309,30.59176
-                  55.31301,30.45 67.8187,30.54539z" opacity="0" fill-opacity="0" z-index="-99"/>
+                  55.31301,30.45 67.8187,30.54539z" opacity="0" fill-opacity="0" z-index="-99"></path>
           </g>
       </svg>
       <div class="shape" ref="shape" >
@@ -31,7 +33,7 @@
                  viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
                 <path class="waveShape" ref="wave" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
                     c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
-                    c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                    c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" ></path>
             </svg>
           </div>
         </div>
@@ -43,7 +45,7 @@
 </template>
 
 <script>
-  //en shotsvg puedes cambiar el color del vaso con fill: red
+  //It's possible to change the color of shotsSVG at #shotssvg fill property
   import Drinks from './DrinksJson';
   import Switches from 'vue-switches';
   import Drawer from './components/Drawer';
@@ -288,7 +290,7 @@
     border: 0;
     background: none;
     box-shadow: none;
-    border-radius: 0px;
+    border-radius: 0;
   }
   .modal-content button {
     position: relative;
@@ -415,7 +417,6 @@
     }
     .shape{
       width:20.2%;
-      height:20%;
       height:20%;
       left:39.6%;
       top:30%;

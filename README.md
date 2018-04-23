@@ -9,8 +9,7 @@
 * Java code translated from old app slows down the app to the point of make it unusable,
 need to make another algorithm
 * new mixing rules
-* Switch imported from another vue component but had to change the size to make it bigger
-* Change the general layout to use a full height page.
+* When all the other points are done, try to implement it as a pwa
 
 
 ## Last functionalities added
@@ -26,3 +25,5 @@ and a whole darker with an skeleton doing the horns or something like that...~~
 * ~~Persist favorite list to local storage~~
 * ~~Make the star in the drawer bigger~~
 * ~~Add delete fav functionality~~
+* Did it using: transform: scalex and scaleY ~~Switch imported from another vue component but had to change the size to make it bigger~~
+* ~~Change the general layout to use a full height page.~~

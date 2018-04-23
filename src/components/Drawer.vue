@@ -59,7 +59,7 @@
         },
         drawerClick(){
           console.log("estado: "+this.showing);
-          var self = this;
+          let self = this;
           if(this.showing){
             this.close();
           }
@@ -84,7 +84,7 @@
         },
         close(){
           this.drawerClasses='drawer ';
-          this.contentClasses='content '
+          this.contentClasses='content ';
           this.$refs.opener.style.left="4em";
           this.showing=false;
         }
